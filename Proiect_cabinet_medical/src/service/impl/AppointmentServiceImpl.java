@@ -1,6 +1,6 @@
 package service.impl;
 
-import administration.Appointment;
+import models.administration.Appointment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import service.AppointmentService;
@@ -15,11 +15,14 @@ import java.util.stream.Collectors;
 @Getter
 public class AppointmentServiceImpl implements AppointmentService {
 
-    private static List<Appointment> eggList = new ArrayList<>();
+    private static List<Appointment> AppointmentList = new ArrayList<>();
 
     @Override
     public Optional<Appointment> getById(UUID id) {
-        return Optional.empty();
+
+        return AppointmentList.stream()
+                .filter(appointment -> appointment.getIdAppointment().equals(id))
+                .findAny();
     }
 
     @Override
@@ -29,22 +32,22 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<Appointment> getAllFromList() {
-        return eggList;
+        return AppointmentList;
     }
 
     @Override
     public void addAllFromGivenList(List<Appointment> appointments) {
-        eggList.addAll(appointments);
+        AppointmentList.addAll(appointments);
     }
 
     @Override
     public void addOnlyOne(Appointment appointment) {
-        eggList.add(appointment);
+        AppointmentList.add(appointment);
     }
 
     @Override
     public void removeElementById(UUID id) {
-        eggList = eggList.stream()
+        AppointmentList = AppointmentList.stream()
                 .filter(element -> !id.equals(element.getIdAppointment()))
                 .collect(Collectors.toList());
     }

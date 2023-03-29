@@ -1,7 +1,7 @@
 package service;
 
 
-import entity.Doctor;
+import models.entity.Doctor;
 
 import java.util.List;
 import java.util.Optional;

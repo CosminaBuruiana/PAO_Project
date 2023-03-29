@@ -1,6 +1,6 @@
 package service;
 
-import entity.Patient;
+import models.entity.Patient;
 
 import java.util.List;
 import java.util.Optional;

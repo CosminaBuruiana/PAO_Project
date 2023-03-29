@@ -1,6 +1,6 @@
 package service.impl;
 
-import entity.Patient;
+import models.entity.Patient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import service.PatientService;
@@ -15,11 +15,13 @@ import java.util.stream.Collectors;
 @Getter
 public class PatientServiceImpl implements PatientService {
 
-    private static List<Patient> eggList = new ArrayList<>();
+    private static List<Patient> PatientList = new ArrayList<>();
 
     @Override
     public Optional<Patient> getById(UUID id) {
-        return Optional.empty();
+        return PatientList.stream()
+                .filter(patient -> patient.getIdPerson().equals(id))
+                .findAny();
     }
 
     @Override
@@ -29,22 +31,22 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> getAllFromList() {
-        return eggList;
+        return PatientList;
     }
 
     @Override
     public void addAllFromGivenList(List<Patient> patients) {
-        eggList.addAll(patients);
+        PatientList.addAll(patients);
     }
 
     @Override
     public void addOnlyOne(Patient patient) {
-        eggList.add(patient);
+        PatientList.add(patient);
     }
 
     @Override
     public void removeElementById(UUID id) {
-        eggList = eggList.stream()
+        PatientList = PatientList.stream()
                 .filter(element -> !id.equals(element.getIdPerson()))
                 .collect(Collectors.toList());
     }

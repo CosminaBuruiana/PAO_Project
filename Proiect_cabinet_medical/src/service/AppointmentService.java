@@ -1,7 +1,7 @@
 package service;
 
 
-import administration.Appointment;
+import models.administration.Appointment;
 
 import java.util.List;
 import java.util.Optional;

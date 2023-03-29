@@ -1,10 +1,9 @@
 package service.impl;
 
-import cure.Cure;
+import models.cure.Cure;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import service.CureService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +14,13 @@ import java.util.stream.Collectors;
 @Getter
 public class CureServiceImpl implements CureService {
 
-    private static List<Cure> eggList = new ArrayList<>();
+    private static List<Cure> CureList = new ArrayList<>();
 
     @Override
     public Optional<Cure> getById(UUID id) {
-        return Optional.empty();
+        return CureList.stream()
+                .filter(cure -> cure.getIdCure().equals(id))
+                .findAny();
     }
 
     @Override
@@ -29,22 +30,22 @@ public class CureServiceImpl implements CureService {
 
     @Override
     public List<Cure> getAllFromList() {
-        return eggList;
+        return CureList;
     }
 
     @Override
     public void addAllFromGivenList(List<Cure> cures) {
-        eggList.addAll(cures);
+        CureList.addAll(cures);
     }
 
     @Override
     public void addOnlyOne(Cure cure) {
-        eggList.add(cure);
+        CureList.add(cure);
     }
 
     @Override
     public void removeElementById(UUID id) {
-        eggList = eggList.stream()
+        CureList = CureList.stream()
                 .filter(element -> !id.equals(element.getIdCure()))
                 .collect(Collectors.toList());
     }

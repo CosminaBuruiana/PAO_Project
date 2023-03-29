@@ -1,30 +1,30 @@
 package application;
+
+
+import models.administration.Appointment;
+import models.cure.Cure;
+import models.entity.Person;
+import models.cure.Medicine;
+import models.cure.enums.MedicineType;
+import models.entity.Doctor;
+import service.DoctorService;
+import service.impl.DoctorServiceImpl;
+
+import javax.print.Doc;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
-import cure.Cure;
-import cure.Medicine;
-import cure.enums.MedicineType;
-import entity.Patient;
-import entity.Doctor;
-import administration.Appointment;
-import service.CureService;
-import service.PatientService;
-import service.DoctorService;
-import service.AppointmentService;
-import service.impl.CureServiceImpl;
-import service.impl.AppointmentServiceImpl;
-import service.impl.DoctorServiceImpl;
-import service.impl.PatientServiceImpl;
 
 
 
 public class Menu {
 
+    private final DoctorService DoctorService = new DoctorServiceImpl();
+
     private static Menu INSTANCE;
 
-    //private final ExampleService exampleService = new ExampleServiceImpl();
+    private final DoctorService exampleService = new DoctorServiceImpl();
 
     public static Menu getInstance() {
         return (INSTANCE == null ? new Menu() : INSTANCE);
@@ -36,17 +36,40 @@ public class Menu {
                 """;
 
         System.out.println(intro);
-//
-//        Medicine medicine = Medicine.builder()
-//                .ID(UUID.randomUUID())
-//                .MedicineType(MedicineType.NONE)
-//                .price(Double.valueOf(123))
-//                .build();
 
-//        Cure cure = Cure.builder()
-//                .IdCure(UUID.randomUUID())
-//                .start_date(LocalDate.now())
-//                .end_date(LocalDate.of(2024,6,12))// data de azi
-//                .build();
+        Medicine medicine = Medicine.builder()
+                .ID(UUID.randomUUID())
+                .MedicineType(MedicineType.NONE)
+                .price(Double.valueOf(123))
+                .build();
+
+
+        Doctor doctor = Doctor.builder()
+                .idPerson(UUID.randomUUID())
+                .experience(Integer.valueOf(3))
+                .hire_date(LocalDate.of(2021,03,12))
+                .salary(Double.valueOf(21000))
+                //.appointmentList(List.of(new Appointment(), new Appointment()))
+                .build();
+        
+        DoctorService.addOnlyOne(doctor);
+
+        System.out.println("Inainte de stergere: ");
+        DoctorService.getAllFromList()
+                .forEach(elementFromList -> System.out.println(elementFromList));
+
+
+        System.out.println("Dupa modificare: ");
+              doctor.setExperience(6);
+        DoctorService.modificaElementById(doctor.getIdPerson(), doctor);
+        DoctorService.getAllFromList()
+                .forEach(elementFromList -> System.out.println(elementFromList));
+
+        System.out.println("Dupa stergere: ");
+        DoctorService.removeElementById(doctor.getIdPerson());
+        DoctorService.getAllFromList()
+                .forEach(elementFromList -> System.out.println(elementFromList));
+
+
     }
 }
