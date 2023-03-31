@@ -26,7 +26,7 @@ public abstract class Person {
     public Person(String name, String last_name, String CNP,String phone_number, String adress, String email) {
         this.name = name;
         this.last_name = last_name;
-        this.CNP =CNP;
+        this.CNP = CNP;
         this.adress = adress;
         this.email = email;
         this.phone_number = phone_number;

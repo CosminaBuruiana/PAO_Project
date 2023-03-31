@@ -10,7 +10,6 @@ public interface PatientService {
 
     Optional<Patient> getById(UUID id);
 
-    Optional<Patient> getBySomeFieldOfClass(Object someFieldPatient);
 
     List<Patient> getAllFromList();
 
@@ -21,4 +20,6 @@ public interface PatientService {
     void removeElementById(UUID id);
 
     void modificaElementById(UUID id, Patient newPatient);
+
+    Optional <List<Patient>> getByName(String name);
 }

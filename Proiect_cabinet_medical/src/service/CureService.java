@@ -8,7 +8,7 @@ public interface CureService {
 
     Optional<Cure> getById(UUID id);
 
-    Optional<Cure> getBySomeFieldOfClass(Object someFieldFromCure);
+    Optional <List<Cure>> getByName(String name);
 
     List<Cure> getAllFromList();
 

@@ -1,10 +1,9 @@
 package service.impl;
 
-import models.administration.Appointment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import models.entity.Cardiologist;
-import service.AppointmentService;
+import models.utils.ErrorMessage;
 import service.CardiologistService;
 
 import java.util.ArrayList;
@@ -13,11 +12,9 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-
-
 @NoArgsConstructor
 @Getter
-public class CardiologistServiceImpl implements CardiologistService {
+public class CardiologistServiceImpl implements CardiologistService, ErrorMessage {
 
     private static List<Cardiologist> CardiologistList = new ArrayList<>();
 
@@ -30,9 +27,10 @@ public class CardiologistServiceImpl implements CardiologistService {
     }
 
     @Override
-    public Optional<Cardiologist> getBySomeFieldOfClass(Object someFieldFromAppointment) {
-        return Optional.empty();
-    }
+    public Optional <List<Cardiologist>> getByName(String name)
+    {
+        List<Cardiologist> list = CardiologistList.stream().filter(Cardiologist -> Cardiologist.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
 
     @Override
     public List<Cardiologist> getAllFromList() {
@@ -60,5 +58,10 @@ public class CardiologistServiceImpl implements CardiologistService {
     public void modificaElementById(UUID id, Cardiologist newCardiologist) {
         removeElementById(id);
         addOnlyOne(newCardiologist);
+    }
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no doctor with name " + name + " in our database!";
     }
 }

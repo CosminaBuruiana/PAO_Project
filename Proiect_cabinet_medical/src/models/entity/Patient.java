@@ -1,13 +1,8 @@
 package models.entity;
 import models.cure.Cure;
 
-
+import lombok.experimental.SuperBuilder;
 import lombok.*;
-import models.entity.Person;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 
 @Getter
 @Setter
@@ -15,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-@Builder
+@SuperBuilder
 
 public class Patient extends Person {
 

@@ -4,7 +4,9 @@ import models.administration.Appointment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import service.AppointmentService;
+import models.utils.ErrorMessage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
-public class AppointmentServiceImpl implements AppointmentService {
+public class AppointmentServiceImpl implements AppointmentService, ErrorMessage {
 
     private static List<Appointment> AppointmentList = new ArrayList<>();
 
@@ -26,9 +28,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Optional<Appointment> getBySomeFieldOfClass(Object someFieldFromAppointment) {
-        return Optional.empty();
-    }
+
+    public Optional <List<Appointment>> getByData(LocalDate data1)
+    {
+        List<Appointment> list = AppointmentList.stream().filter(appointment -> appointment.getData().equals(data1)).collect(Collectors.toList());
+        return Optional.of(list);}
 
     @Override
     public List<Appointment> getAllFromList() {
@@ -57,4 +61,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         removeElementById(id);
         addOnlyOne(newAppointment);
     }
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no appointment with name " + name + " in our database!";
+    }
+    
 }

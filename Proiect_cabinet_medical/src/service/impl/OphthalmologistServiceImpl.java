@@ -3,6 +3,7 @@ package service.impl;
 import models.entity.Ophthalmologist;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import models.utils.ErrorMessage;
 import service.OphthalmologistService;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
-public class OphthalmologistServiceImpl implements OphthalmologistService {
+public class OphthalmologistServiceImpl implements OphthalmologistService, ErrorMessage {
 
     private static List<Ophthalmologist> OphthalmologistList = new ArrayList<>();
 
@@ -26,9 +27,11 @@ public class OphthalmologistServiceImpl implements OphthalmologistService {
     }
 
     @Override
-    public Optional<Ophthalmologist> getBySomeFieldOfClass(Object someFieldFromOphthalmologist) {
-        return Optional.empty();
-    }
+    public Optional <List<Ophthalmologist>> getByName(String name)
+    {
+        List<Ophthalmologist> list = OphthalmologistList.stream().filter(Ophthalmologist -> Ophthalmologist.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
+
 
     @Override
     public List<Ophthalmologist> getAllFromList() {
@@ -56,5 +59,11 @@ public class OphthalmologistServiceImpl implements OphthalmologistService {
     public void modificaElementById(UUID id, Ophthalmologist newOphthalmologist) {
         removeElementById(id);
         addOnlyOne(newOphthalmologist);
+    }
+
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no doctor with name " + name + " in our database!";
     }
 }

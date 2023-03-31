@@ -3,6 +3,7 @@ package service.impl;
 import models.cure.Cure;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import models.utils.ErrorMessage;
 import service.CureService;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
-public class CureServiceImpl implements CureService {
+public class CureServiceImpl implements CureService, ErrorMessage {
 
     private static List<Cure> CureList = new ArrayList<>();
 
@@ -24,9 +25,10 @@ public class CureServiceImpl implements CureService {
     }
 
     @Override
-    public Optional<Cure> getBySomeFieldOfClass(Object someFieldFromCure) {
-        return Optional.empty();
-    }
+    public Optional <List<Cure>> getByName(String name)
+    {
+        List<Cure> list = CureList.stream().filter(Cure -> Cure.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
 
     @Override
     public List<Cure> getAllFromList() {
@@ -54,5 +56,10 @@ public class CureServiceImpl implements CureService {
     public void modificaElementById(UUID id, Cure newCure) {
         removeElementById(id);
         addOnlyOne(newCure);
+    }
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no cure with name " + name + " in our database!";
     }
 }

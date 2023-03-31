@@ -3,6 +3,7 @@ package service.impl;
 import models.management.MedicalClinic;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import models.utils.ErrorMessage;
 import service.MedicalClinicService;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
-public class MedicalClinicServiceImpl implements MedicalClinicService {
+public class MedicalClinicServiceImpl implements MedicalClinicService, ErrorMessage {
 
     private static List<MedicalClinic> MedicalClinicList = new ArrayList<>();
 
@@ -26,9 +27,10 @@ public class MedicalClinicServiceImpl implements MedicalClinicService {
     }
 
     @Override
-    public Optional<MedicalClinic> getBySomeFieldOfClass(Object someFieldFromMedicalClinic) {
-        return Optional.empty();
-    }
+    public Optional <List<MedicalClinic>> getByName(String name)
+    {
+        List<MedicalClinic> list = MedicalClinicList.stream().filter(MedicalClinic -> MedicalClinic.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
 
     @Override
     public List<MedicalClinic> getAllFromList() {
@@ -56,5 +58,10 @@ public class MedicalClinicServiceImpl implements MedicalClinicService {
     public void modificaElementById(UUID id, MedicalClinic newMedicalClinic) {
         removeElementById(id);
         addOnlyOne(newMedicalClinic);
+    }
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no Medical Clinic with name " + name + " in our database!";
     }
 }

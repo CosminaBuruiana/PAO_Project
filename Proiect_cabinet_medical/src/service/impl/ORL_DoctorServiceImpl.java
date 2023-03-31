@@ -3,6 +3,7 @@ package service.impl;
 import models.entity.ORL_Doctor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import models.utils.ErrorMessage;
 import service.ORL_DoctorService;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Getter
-public class ORL_DoctorServiceImpl implements ORL_DoctorService {
+public class ORL_DoctorServiceImpl implements ORL_DoctorService, ErrorMessage {
 
     private static List<ORL_Doctor> ORL_DoctorList = new ArrayList<>();
 
@@ -26,9 +27,10 @@ public class ORL_DoctorServiceImpl implements ORL_DoctorService {
     }
 
     @Override
-    public Optional<ORL_Doctor> getBySomeFieldOfClass(Object someFieldFromORL_Doctor) {
-        return Optional.empty();
-    }
+    public Optional <List<ORL_Doctor>> getByName(String name)
+    {
+        List<ORL_Doctor> list = ORL_DoctorList.stream().filter(ORL_Doctor -> ORL_Doctor.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
 
     @Override
     public List<ORL_Doctor> getAllFromList() {
@@ -56,5 +58,10 @@ public class ORL_DoctorServiceImpl implements ORL_DoctorService {
     public void modificaElementById(UUID id, ORL_Doctor newORL_Doctor) {
         removeElementById(id);
         addOnlyOne(newORL_Doctor);
+    }
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no doctor with name " + name + " in our database!";
     }
 }

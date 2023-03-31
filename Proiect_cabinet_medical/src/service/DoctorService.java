@@ -11,7 +11,7 @@ public interface DoctorService {
 
     Optional<Doctor> getById(UUID id);
 
-    Optional<Doctor> getBySomeFieldOfClass(Object someFieldFromDoctor);
+    Optional <List<Doctor>> getByName(String name);
 
     List<Doctor> getAllFromList();
 
@@ -22,4 +22,5 @@ public interface DoctorService {
     void removeElementById(UUID id);
 
     void modificaElementById(UUID id, Doctor newDoctor);
+
 }

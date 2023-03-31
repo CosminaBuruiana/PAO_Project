@@ -9,7 +9,7 @@ public interface CardiologistService {
 
     Optional<Cardiologist> getById(UUID id);
 
-    Optional<Cardiologist> getBySomeFieldOfClass(Object someFieldFromCardiologist);
+    Optional <List<Cardiologist>> getByName(String name);
 
     List<Cardiologist> getAllFromList();
 

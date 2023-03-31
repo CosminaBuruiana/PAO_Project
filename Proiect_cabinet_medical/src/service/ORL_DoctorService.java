@@ -11,7 +11,7 @@ public interface ORL_DoctorService {
 
     Optional<ORL_Doctor> getById(UUID id);
 
-    Optional<ORL_Doctor> getBySomeFieldOfClass(Object someFieldFromORL_Doctor);
+    Optional <List<ORL_Doctor>> getByName(String name);
 
     List<ORL_Doctor> getAllFromList();
 

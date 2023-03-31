@@ -1,5 +1,12 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
+
 import application.Menu;
+import models.entity.*;
+import models.management.MedicalClinic;
 
 public class Main {
 
@@ -14,6 +21,8 @@ public class Main {
             if ("exit".equals(scanner.next())) {
                 break;
             }
+
+
         }
     }
 }

@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import models.utils.ErrorMessage;
 
 @NoArgsConstructor
 @Getter
-public class PatientServiceImpl implements PatientService {
+public class PatientServiceImpl implements PatientService, ErrorMessage {
 
     private static List<Patient> PatientList = new ArrayList<>();
 
@@ -22,11 +23,6 @@ public class PatientServiceImpl implements PatientService {
         return PatientList.stream()
                 .filter(patient -> patient.getIdPerson().equals(id))
                 .findAny();
-    }
-
-    @Override
-    public Optional<Patient> getBySomeFieldOfClass(Object someFieldFromPatient) {
-        return Optional.empty();
     }
 
     @Override
@@ -55,5 +51,16 @@ public class PatientServiceImpl implements PatientService {
     public void modificaElementById(UUID id, Patient newPatient) {
         removeElementById(id);
         addOnlyOne(newPatient);
+    }
+    @Override
+    public Optional <List<Patient>> getByName(String name)
+    {
+        List<Patient> list = PatientList.stream().filter(patient -> patient.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
+
+
+    @Override
+    public String errorMessage(String name) {
+        return "This patient doesn't exist in our database!";
     }
 }

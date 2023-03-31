@@ -11,7 +11,7 @@ public interface MedicineService {
 
     Optional<Medicine> getById(UUID id);
 
-    Optional<Medicine> getBySomeFieldOfClass(Object someFieldFromMedicine);
+    Optional <List<Medicine>> getByType(String name);
 
     List<Medicine> getAllFromList();
 

@@ -11,7 +11,7 @@ public interface OphthalmologistService {
 
     Optional<Ophthalmologist> getById(UUID id);
 
-    Optional<Ophthalmologist> getBySomeFieldOfClass(Object someFieldFromOphtalmologist);
+    Optional <List<Ophthalmologist>> getByName(String name);
 
     List<Ophthalmologist> getAllFromList();
 

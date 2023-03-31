@@ -1,5 +1,5 @@
 package models.administration;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import models.entity.Doctor;
@@ -16,12 +16,12 @@ import lombok.*;
 public class Appointment {
 
     private UUID idAppointment;
-    private Calendar data;
+    private LocalDate data;
     private Patient patient;
     private Doctor doctor;
     private Double price;
 
-    public Appointment(Calendar data, Patient patient, Doctor doctor, Double price){
+    public Appointment(LocalDate data, Patient patient, Doctor doctor, Double price){
 
         this.data = data;
         this.patient = patient;

@@ -18,5 +18,4 @@ public class ORL_Doctor extends Doctor{
 
     static List<Medicine> medicines;
 
-
 }

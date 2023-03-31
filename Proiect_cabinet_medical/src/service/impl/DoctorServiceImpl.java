@@ -3,17 +3,16 @@ package service.impl;
 import models.entity.Doctor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import models.utils.ErrorMessage;
 import service.DoctorService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 @NoArgsConstructor
 @Getter
-public class DoctorServiceImpl implements DoctorService {
+public class DoctorServiceImpl implements DoctorService, ErrorMessage {
 
     private static List<Doctor> DoctorList = new ArrayList<>();
 
@@ -26,9 +25,10 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Optional<Doctor> getBySomeFieldOfClass(Object someFieldFromDoctor) {
-        return Optional.empty();
-    }
+    public Optional <List<Doctor>> getByName(String name)
+    {
+        List<Doctor> list = DoctorList.stream().filter(Doctor -> Doctor.getName().equals(name)).collect(Collectors.toList());
+        return Optional.of(list);}
 
     @Override
     public List<Doctor> getAllFromList() {
@@ -57,4 +57,11 @@ public class DoctorServiceImpl implements DoctorService {
         removeElementById(id);
         addOnlyOne(newDoctor);
     }
+
+
+    @Override
+    public String errorMessage(String name) {
+        return "There is no doctor with name " + name + " in our database!";
+    }
+
 }

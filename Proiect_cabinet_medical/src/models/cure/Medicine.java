@@ -1,6 +1,6 @@
 package models.cure;
 import lombok.*;
-import models.cure.enums.MedicineType;
+
 
 import java.util.UUID;
 
@@ -18,9 +18,9 @@ public class Medicine {
 
     private Double price;
 
-    private MedicineType MedicineType;
+    private String MedicineType;
 
-    public Medicine(String name, Double price, MedicineType MedicineType)
+    public Medicine(String name, Double price, String MedicineType)
     {
         this.name = name;
         this.price = price;
