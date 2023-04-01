@@ -3,6 +3,7 @@ import models.cure.Medicine;
 import java.util.List;
 import lombok.experimental.SuperBuilder;
 import lombok.*;
+import models.tool.ToolOphthalmologist;
 
 @Getter
 @Setter
@@ -14,10 +15,14 @@ import lombok.*;
 
 
 public class Ophthalmologist extends Doctor{
+    private ToolOphthalmologist tool;
 
-    public List<Patient> patientList;
-    static List<Medicine> medicines;
-
-
-
+    @Override
+    public String toString() {
+        return "Ophthalmologist " + getLast_name() + " " + getName() + ": " + " email: " + getEmail()
+                + ", CNP: " + getCNP() + ", phone_number: " + getPhone_number() + ", adress: " + getAdress()
+                + ", hire_date: " + getHire_date() + ", experience: " + getExperience()
+                + ", salary" + getSalary() + ", Appointments: " + getAppointmentList()
+                + "Tool Ophthalmologist: " + tool;
+    }
 }

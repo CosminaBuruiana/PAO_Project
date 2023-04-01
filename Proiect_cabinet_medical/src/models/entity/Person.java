@@ -12,24 +12,19 @@ import java.util.UUID;
 @EqualsAndHashCode
 public abstract class Person {
 
-    private UUID idPerson;
-    private String name;
-    private String last_name;
-    private String email;
+    protected UUID idPerson;
 
-    private String CNP;
+    protected String name;
+    protected String last_name;
+    protected String email;
+    protected String CNP;
+    protected String phone_number;
+    protected String adress;
 
-    private String phone_number;
-
-    private String adress;
-
-    public Person(String name, String last_name, String CNP,String phone_number, String adress, String email) {
-        this.name = name;
-        this.last_name = last_name;
-        this.CNP = CNP;
-        this.adress = adress;
-        this.email = email;
-        this.phone_number = phone_number;
+    @Override
+    public String toString() {
+        return "Person " + name + " " + last_name + ": " + " email: " + email
+                + ", CNP: " + CNP + ", phone_number: " + phone_number + ", adress: ";
     }
 
 }

@@ -1,5 +1,6 @@
 package models.administration;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 import models.entity.Doctor;
@@ -16,18 +17,13 @@ import lombok.*;
 public class Appointment {
 
     private UUID idAppointment;
-    private LocalDate data;
-    private Patient patient;
-    private Doctor doctor;
+    private String data;
     private Double price;
 
-    public Appointment(LocalDate data, Patient patient, Doctor doctor, Double price){
 
-        this.data = data;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.price = price;
-
+    @Override
+    public String toString() {
+        return "Appointment: " + data +  ", Price: " + price;
     }
 
 }

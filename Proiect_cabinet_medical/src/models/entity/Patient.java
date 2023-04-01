@@ -1,4 +1,5 @@
 package models.entity;
+import models.administration.Appointment;
 import models.cure.Cure;
 
 import lombok.experimental.SuperBuilder;
@@ -19,6 +20,18 @@ public class Patient extends Person {
     private String bloodType;
     private Boolean medical_insurance;
     private Cure cure;
+
+    private Appointment appointment;
+
+    @Override
+    public String toString() {
+        return "Patient " + getLast_name() + " " + getName() + ": " + ", email: " + getEmail()
+                + ", CNP: " + getCNP() + ", phone_number: " + getPhone_number() + ", adress: "
+                + ", status: " + status + ", disease: " + disease
+                + "bloodType: " + bloodType + ", medical insurance:" + medical_insurance
+                + "cure: " + cure;
+    }
+
 
     public Patient(String disease, String bloodType, Cure cure, String status, Boolean medical_insurance){
 

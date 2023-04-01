@@ -3,6 +3,7 @@ import models.cure.Medicine;
 import java.util.List;
 import lombok.experimental.SuperBuilder;
 import lombok.*;
+import models.tool.ToolORL;
 
 @Getter
 @Setter
@@ -14,8 +15,15 @@ import lombok.*;
 
 public class ORL_Doctor extends Doctor{
 
-    private List<Patient> patientList;
+   private ToolORL tool;
 
-    static List<Medicine> medicines;
+   @Override
+   public String toString() {
+      return "ORL Doctor " + getLast_name() + " " + getName() + ": " + ", email: " + getEmail()
+              + ", CNP: " + getCNP() + ", phone_number: " + getPhone_number() + ", adress: " + getAdress()
+              + ", hire_date: " + getHire_date() + ", experience: " + getExperience()
+              + ", salary" + getSalary() + ", Appointments: " + getAppointmentList()
+              + "Tool ORLDoctor: " + tool;
+   }
 
 }

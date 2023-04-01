@@ -29,10 +29,10 @@ public class AppointmentServiceImpl implements AppointmentService, ErrorMessage 
 
     @Override
 
-    public Optional <List<Appointment>> getByData(LocalDate data1)
-    {
+    public Optional <List<Appointment>> getByData(String data1) {
         List<Appointment> list = AppointmentList.stream().filter(appointment -> appointment.getData().equals(data1)).collect(Collectors.toList());
-        return Optional.of(list);}
+        return Optional.of(list);
+    }
 
     @Override
     public List<Appointment> getAllFromList() {

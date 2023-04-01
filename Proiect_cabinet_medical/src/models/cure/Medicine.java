@@ -20,10 +20,11 @@ public class Medicine {
 
     private String MedicineType;
 
-    public Medicine(String name, Double price, String MedicineType)
-    {
-        this.name = name;
-        this.price = price;
-        this.MedicineType = MedicineType;
+    @Override
+    public String toString() {
+        return "Medicine: " + name + ", price: " + price + ": " + ", MedicineType: " + MedicineType;
+
     }
+
+
 }

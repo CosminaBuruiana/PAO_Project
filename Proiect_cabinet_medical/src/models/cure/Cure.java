@@ -1,10 +1,5 @@
 package models.cure;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 import lombok.*;
@@ -22,15 +17,15 @@ public class Cure {
 
     private UUID idCure;
     private String name;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private Date start_date;
+    private Date end_date;
     private List<Medicine> medicineList;
 
-    public Cure(LocalDate start_date, LocalDate end_date, String name){
-
-        this.name = name;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.medicineList = new ArrayList<Medicine>();
+    @Override
+    public String toString() {
+        return "Cure" + name + ", start_date:" + start_date+ ": " + ", end_date: " + end_date
+                + ", Medicines: " + medicineList;
     }
+
+
 }

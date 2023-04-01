@@ -1,8 +1,5 @@
 package service;
-
-
 import models.administration.Appointment;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +9,7 @@ public interface AppointmentService {
 
     Optional<Appointment> getById(UUID id);
 
-    Optional <List<Appointment>> getByData(LocalDate data);
+    Optional <List<Appointment>> getByData(String data);
 
     List<Appointment> getAllFromList();
 
