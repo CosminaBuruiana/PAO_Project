@@ -22,6 +22,4 @@ public interface DoctorService {
     void removeElementById(UUID id);
 
     void modificaElementById(UUID id, Doctor newDoctor);
-
-
 }
