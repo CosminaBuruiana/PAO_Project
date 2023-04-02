@@ -40,6 +40,7 @@ public class Menu {
 
 
         System.out.println("Choose an option: ");
+        System.out.println("0. Create a list of doctor");
         System.out.println("1. Add a doctor");
         System.out.println("2. List of doctors");
         System.out.println("3. Modify the doctor experience");
@@ -50,6 +51,8 @@ public class Menu {
         System.out.println("8. Remove an appointment for a doctor");
         System.out.println("9. Add an appointment for a doctor");
         System.out.println("10. Appointments list by a date");
+        System.out.println("11. Appointments list by a doctor");
+
 
 
         Scanner keyboard = new Scanner(System.in);
@@ -165,6 +168,7 @@ public class Menu {
                 .build();
 
         Doctor doctor1 = Doctor.builder()
+                .idPerson(UUID.randomUUID())
                 .name("Grigorescu")
                 .last_name("Sorana")
                 .email("grigorescu.sorana@gmail.com")
@@ -177,6 +181,7 @@ public class Menu {
                 .build();
 
         Doctor doctor2 = Doctor.builder()
+                .idPerson(UUID.randomUUID())
                 .name("Andronache")
                 .last_name("Crina")
                 .email("mircescu.crina@gmail.com")
@@ -216,15 +221,16 @@ public class Menu {
                 .build();
 
 
-        DoctorService.addOnlyOne(doctor);
-        DoctorService.addOnlyOne(doctor1);
-        DoctorService.addOnlyOne(doctor2);
-        DoctorService.addOnlyOne(doctor3);
-        DoctorService.addOnlyOne(doctor4);
-
-
 
         String Keyboard = keyboard.next();
+        if("0".equals(Keyboard)){
+
+            DoctorService.addOnlyOne(doctor);
+            DoctorService.addOnlyOne(doctor1);
+            DoctorService.addOnlyOne(doctor2);
+            DoctorService.addOnlyOne(doctor3);
+            DoctorService.addOnlyOne(doctor4);
+        }
 
         if ("1".equals(Keyboard)) {
 
@@ -268,7 +274,7 @@ public class Menu {
                     .hire_date(LocalDate.now())
                     .salary(salValue)
                     .phone_number(phoneValue)
-                    //.appointmentList(List.of(new Appointment(), new Appointment()))
+                    .appointmentList(List.of(new Appointment(), new Appointment()))
                     .build();
 
             DoctorService.addOnlyOne(doctor5);
@@ -301,7 +307,8 @@ public class Menu {
         if("4".equals(Keyboard)){
 
             System.out.println("Remove a doctor: ");
-            DoctorService.removeElementById(doctor.getIdPerson());
+            UUID PersonID = UUID.fromString(keyboard.next());
+            DoctorService.removeElementById(PersonID);
             DoctorService.getAllFromList()
                     .forEach(elementFromList -> elementFromList.toString());
         }
@@ -471,8 +478,9 @@ public class Menu {
                     Scanner s = new Scanner(System.in);
                     String data = s.nextLine();
                     doc.removeAppointment(data);
-
                     foundDoctor = true;
+                    break;
+
                 }
             }
 
@@ -530,6 +538,28 @@ public class Menu {
             System.out.println(AppointmentService.getByData(nameValue));
 
         }
+        else
+        if("11".equals(Keyboard)){
+
+
+            System.out.println("Enter the name of doctor");
+            Scanner val = new Scanner(System.in);
+            String nameValue = val.nextLine();
+
+            for (int i = 0; i < DoctorService.getAllFromList().size(); i++) {
+
+                Doctor doc = new Doctor(DoctorService.getAllFromList().get(i));
+
+                if (nameValue.equals(doc.getName())) {
+
+                    doc.showAppointment();
+                }
+
+            }
+
+
+        }
+
 
 
     }

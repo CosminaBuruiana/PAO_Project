@@ -45,12 +45,25 @@ public class DoctorServiceImpl implements DoctorService, ErrorMessage {
         DoctorList.add(doctor);
     }
 
-    @Override
+//    @Override
+//    public void removeElementById(UUID id) {
+//        DoctorList = DoctorList.stream()
+//                .filter(element -> !id.equals(element.getIdPerson()))
+//                .collect(Collectors.toList());
+//    }
+
     public void removeElementById(UUID id) {
         DoctorList = DoctorList.stream()
                 .filter(element -> !id.equals(element.getIdPerson()))
                 .collect(Collectors.toList());
     }
+
+    public void removeElementByName(String id) {
+        DoctorList = DoctorList.stream()
+                .filter(element -> !id.equals(element.getIdPerson()))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void modificaElementById(UUID id, Doctor newDoctor) {
