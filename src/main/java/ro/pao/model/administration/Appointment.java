@@ -17,8 +17,9 @@ import lombok.*;
 public class Appointment {
 
     private UUID idAppointment;
-    private String data;
+    private Date data;
     private Double price;
+    private UUID id_doctor;
 
 
     @Override

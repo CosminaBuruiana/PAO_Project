@@ -19,7 +19,7 @@ import lombok.*;
 
 public class Doctor extends Person {
 
-    private LocalDate hire_date;
+    private Date hire_date;
     private Integer experience;
     private Double salary;
     private List<Appointment> appointmentList = new ArrayList<>();

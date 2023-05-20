@@ -18,7 +18,7 @@ public class Patient extends Person {
     private String status;
     private String disease;
     private String bloodType;
-    private Boolean medical_insurance;
+    private String medical_insurance;
     private Cure cure;
 
     private Appointment appointment;
@@ -33,12 +33,12 @@ public class Patient extends Person {
     }
 
 
-    public Patient(String disease, String bloodType, Cure cure, String status, Boolean medical_insurance){
+    public Patient(String disease, String bloodType, Cure cure, String status, String medical_insurance){
 
         this.disease = disease;
         this.bloodType = bloodType;
         this.cure = cure;
-        this.status =status;
+        this.status = status;
         this.medical_insurance = medical_insurance;
 
     }

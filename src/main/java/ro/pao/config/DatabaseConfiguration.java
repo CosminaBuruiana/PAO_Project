@@ -11,7 +11,9 @@ public class DatabaseConfiguration {
     private static final String PASSWORD = "root";
     private static Connection databaseConnection;
 
-    private DatabaseConfiguration() {
+//    private DatabaseConfiguration() {
+//    }
+    public DatabaseConfiguration() {
     }
 
     public static Connection getDatabaseConnection() {

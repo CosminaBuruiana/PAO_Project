@@ -1,6 +1,7 @@
 package ro.pao.model.tool;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import ro.pao.model.administration.Appointment;
 import lombok.*;
@@ -13,6 +14,6 @@ import lombok.*;
 @ToString
 @Builder
 public class ToolOphthalmologist {
-
+    private UUID id;
     private String name;
 }
