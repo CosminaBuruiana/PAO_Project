@@ -1,11 +1,13 @@
 package ro.pao.application;
 
 import ro.pao.model.ExampleClass;
+import ro.pao.model.entity.Doctor;
 import ro.pao.repository.impl.ExampleRepositoryImpl;
 import ro.pao.service.ExampleService;
 import ro.pao.service.impl.ExampleServiceImpl;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,44 +34,45 @@ public class Menu {
 
         System.out.println(intro);
 
-        ExampleClass exampleClass = ExampleClass.builder()
-                .id(UUID.randomUUID())
-                .creationDate(LocalDate.now()) // data de azi
-                .updateDate(LocalDate.now())
-                .deleteDate(LocalDate.now())
+        Doctor doctor = Doctor.builder()
+                .idPerson(UUID.randomUUID())
+                .name(String.valueOf("Ana")) // data de azi
+                .last_name(String.valueOf("Popescu"))
+                .salary(Double.valueOf(3212))
+                .experience(Integer.valueOf(3))
                 .build();
 
-        exampleService.addOnlyOne(exampleClass);
+        //doctorService.addOnlyOne(doctor);
 
-        List<ExampleClass> exampleServiceList = List.of(
-                ExampleClass.builder()
-                        .id(UUID.randomUUID())
-                        .creationDate(LocalDate.of(2023, 03, 22))
-                        .updateDate(LocalDate.now())
-                        .build(),
-                ExampleClass.builder()
-                        .id(UUID.randomUUID())
-                        .creationDate(LocalDate.of(2023, 03, 22))
-                        .updateDate(LocalDate.now())
-                        .build()
-        );
+//        List<Doctor> doctorServiceList = List.of(
+//                ExampleClass.builder()
+//                        .id(UUID.randomUUID())
+//                        .creationDate(LocalDate.of(2023, 03, 22))
+//                        .updateDate(LocalDate.now())
+//                        .build(),
+//                ExampleClass.builder()
+//                        .id(UUID.randomUUID())
+//                        .creationDate(LocalDate.of(2023, 03, 22))
+//                        .updateDate(LocalDate.now())
+//                        .build()
+//        );
 
-        exampleService.addAllFromGivenList(exampleServiceList);
+//        exampleService.addAllFromGivenList(exampleServiceList);
+//
+//        System.out.println("Inainte de stergere: ");
+//        exampleService.getAllFromList()
+//                .forEach(elementFromList -> System.out.println(elementFromList));
 
-        System.out.println("Inainte de stergere: ");
-        exampleService.getAllFromList()
-                .forEach(elementFromList -> System.out.println(elementFromList));
 
-
-        System.out.println("Dupa modificare: ");
-        exampleClass.setUpdateDate(LocalDate.of(2, 2, 2));
-        exampleService.modificaElementById(exampleClass.getId(), exampleClass);
-        exampleService.getAllFromList()
-                .forEach(elementFromList -> System.out.println(elementFromList));
-
-        System.out.println("Dupa stergere: ");
-        exampleService.removeElementById(exampleClass.getId());
-        exampleService.getAllFromList()
-                .forEach(elementFromList -> System.out.println(elementFromList));
+//        System.out.println("Dupa modificare: ");
+//        exampleClass.setUpdateDate(LocalDate.of(2, 2, 2));
+//        exampleService.modificaElementById(exampleClass.getId(), exampleClass);
+//        exampleService.getAllFromList()
+//                .forEach(elementFromList -> System.out.println(elementFromList));
+//
+//        System.out.println("Dupa stergere: ");
+//        exampleService.removeElementById(exampleClass.getId());
+//        exampleService.getAllFromList()
+//                .forEach(elementFromList -> System.out.println(elementFromList));
     }
 }
