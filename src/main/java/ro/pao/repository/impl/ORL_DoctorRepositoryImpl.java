@@ -1,9 +1,11 @@
 package ro.pao.repository.impl;
 
 import ro.pao.config.DatabaseConfiguration;
-import ro.pao.mapper.AppointmentMapper;
-import ro.pao.model.administration.Appointment;
-import ro.pao.repository.AppointmentRepository;
+import ro.pao.mapper.ORL_DoctorMapper;
+import ro.pao.model.entity.ORL_Doctor;
+import ro.pao.repository.ExampleRepository;
+import ro.pao.repository.ORL_DoctorRepository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,12 +14,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class AppointmentRepositoryImpl implements AppointmentRepository {
+public class ORL_DoctorRepositoryImpl implements ORL_DoctorRepository {
 
-    private static final AppointmentMapper appointmentMapper = AppointmentMapper.getInstance();
+    private static final ORL_DoctorMapper orlDoctorMapper = ORL_DoctorMapper.getInstance();
 
     @Override
-    public Optional<Appointment> getObjectById(UUID id) {
+    public Optional<ORL_Doctor> getObjectById(UUID id) {
         String selectSql = "SELECT * FROM example_table WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
@@ -25,7 +27,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
             preparedStatement.setString(1, id.toString());
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            return appointmentMapper.mapToAppointment(resultSet);
+            return orlDoctorMapper.mapToORL_Doctor(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,12 +50,12 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void updateObjectById(UUID id, Appointment newObject) {
-        String updateNameSql = "UPDATE appointment SET name=? WHERE id=?";
+    public void updateObjectById(UUID id, ORL_Doctor newObject) {
+        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            preparedStatement.setDouble(1, newObject.getPrice());
+            //preparedStatement.setString(1, newObject.getExampleStringField());
             preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
@@ -63,13 +65,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void addNewObject(Appointment Appointment) {
+    public void addNewObject(ORL_Doctor ORL_Doctor) {
         String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
-          //  preparedStatement.setString(1, Appointment.getId().toString());
-            //preparedStatement.setString(2, Appointment.getExampleStringField());
+           // preparedStatement.setString(1, ORL_Doctor.getId().toString());
+            //preparedStatement.setString(2, ORL_Doctor.getExampleStringField());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -78,14 +80,14 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public List<Appointment> getAll() {
+    public List<ORL_Doctor> getAll() {
         String selectSql = "SELECT * FROM example_table";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            return appointmentMapper.mapToAppointmentList(resultSet);
+            return orlDoctorMapper.mapToORL_DoctorList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +96,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void addAllFromGivenList(List<Appointment> AppointmentList) {
-        AppointmentList.forEach(this::addNewObject);
+    public void addAllFromGivenList(List<ORL_Doctor> ORL_DoctorList) {
+        ORL_DoctorList.forEach(this::addNewObject);
     }
 }

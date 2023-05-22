@@ -1,9 +1,10 @@
 package ro.pao.repository.impl;
 
 import ro.pao.config.DatabaseConfiguration;
-import ro.pao.mapper.AppointmentMapper;
-import ro.pao.model.administration.Appointment;
-import ro.pao.repository.AppointmentRepository;
+import ro.pao.mapper.CureMapper;
+import ro.pao.model.cure.Cure;
+import ro.pao.repository.CureRepository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,12 +13,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class AppointmentRepositoryImpl implements AppointmentRepository {
+public class CureRepositoryImpl implements CureRepository {
 
-    private static final AppointmentMapper appointmentMapper = AppointmentMapper.getInstance();
+    private static final CureMapper cureMapper = CureMapper.getInstance();
 
     @Override
-    public Optional<Appointment> getObjectById(UUID id) {
+    public Optional<Cure> getObjectById(UUID id) {
         String selectSql = "SELECT * FROM example_table WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
@@ -25,7 +26,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
             preparedStatement.setString(1, id.toString());
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            return appointmentMapper.mapToAppointment(resultSet);
+            return cureMapper.mapToCure(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,13 +49,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void updateObjectById(UUID id, Appointment newObject) {
-        String updateNameSql = "UPDATE appointment SET name=? WHERE id=?";
+    public void updateObjectById(UUID id, Cure newObject) {
+        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            preparedStatement.setDouble(1, newObject.getPrice());
-            preparedStatement.setString(2, id.toString());
+           // preparedStatement.setString(1, newObject.getExampleStringField());
+           // preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -63,13 +64,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void addNewObject(Appointment Appointment) {
+    public void addNewObject(Cure Cure) {
         String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
-          //  preparedStatement.setString(1, Appointment.getId().toString());
-            //preparedStatement.setString(2, Appointment.getExampleStringField());
+           // preparedStatement.setString(1, Cure.getId().toString());
+           // preparedStatement.setString(2, Cure.getExampleStringField());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -78,14 +79,14 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public List<Appointment> getAll() {
+    public List<Cure> getAll() {
         String selectSql = "SELECT * FROM example_table";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            return appointmentMapper.mapToAppointmentList(resultSet);
+            return cureMapper.mapToCureList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +95,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public void addAllFromGivenList(List<Appointment> AppointmentList) {
-        AppointmentList.forEach(this::addNewObject);
+    public void addAllFromGivenList(List<Cure> CureList) {
+        CureList.forEach(this::addNewObject);
     }
 }
