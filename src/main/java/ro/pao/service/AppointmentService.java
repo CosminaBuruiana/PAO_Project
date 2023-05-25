@@ -2,6 +2,8 @@ package ro.pao.service;
 
 import ro.pao.model.administration.Appointment;
 
+import javax.xml.crypto.Data;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,9 +22,10 @@ import java.util.UUID;
  */
 public interface AppointmentService {
 
-    Optional<Appointment> getById(UUID id);
+    Optional<Appointment> getById(UUID id) throws SQLException;
 
-    Optional<Appointment> getBySomeFieldOfClass(Object someFieldFromAppointment);
+    Optional<List<Appointment>> getByData(Data date);
+    Optional<List<Appointment>> getByDoctor(UUID id);
 
     List<Appointment> getAllFromList();
 

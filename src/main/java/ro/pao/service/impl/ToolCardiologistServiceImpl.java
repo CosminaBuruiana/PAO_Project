@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
+import ro.pao.model.cure.Cure;
 import ro.pao.model.tool.ToolCardiologist;
 import ro.pao.repository.ToolCardiologistRepository;
 import ro.pao.service.ToolCardiologistService;
@@ -20,6 +21,7 @@ import java.util.*;
 public class ToolCardiologistServiceImpl implements ToolCardiologistService {
 
     private final ToolCardiologistRepository toolCardiologistRepository;
+    private static List<ToolCardiologist> toolCardiologistList = new ArrayList<>();
 
     @Override
     public Optional<ToolCardiologist> getById(UUID id) {

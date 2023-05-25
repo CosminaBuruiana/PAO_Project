@@ -14,7 +14,7 @@ import ro.pao.model.tool.ToolOphthalmologist;
 @SuperBuilder
 
 
-public class Ophthalmologist extends Doctor{
+public non-sealed class Ophthalmologist extends Doctor{
     private ToolOphthalmologist tool;
 
     @Override

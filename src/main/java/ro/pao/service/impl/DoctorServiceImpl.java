@@ -8,6 +8,7 @@ import ro.pao.model.entity.Doctor;
 import ro.pao.repository.DoctorRepository;
 import ro.pao.service.DoctorService;
 
+import javax.xml.crypto.Data;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -20,14 +21,21 @@ import java.util.*;
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
+    private static List<Doctor> doctorList = new ArrayList<>();
+
 
     @Override
     public Optional<Doctor> getById(UUID id) {
-        return doctorRepository.getObjectById(id);
+        return doctorRepository.getDoctorById(id);
     }
 
     @Override
-    public Optional<Doctor> getBySomeFieldOfClass(Object someFieldFromDoctor) {
+    public Optional<List<Doctor>> getByName(String name) {
+        return doctorRepository.getObjectByName(name);
+    }
+
+    @Override
+    public Optional<Doctor> getBySomeFieldOfClass(Doctor someFieldFromDoctor) {
         return Optional.empty();
     }
 
@@ -48,17 +56,17 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void addOnlyOne(Doctor Doctor) {
-        doctorRepository.addNewObject(Doctor);
+        doctorRepository.addNewDoctor(Doctor);
     }
 
     @Override
     public void removeElementById(UUID id) {
-        doctorRepository.deleteObjectById(id);
+        doctorRepository.deleteDoctorById(id);
     }
 
     @Override
     public void modificaElementById(UUID id, Doctor newElement) {
-        doctorRepository.updateObjectById(id, newElement);
+        doctorRepository.updateDoctorById(id, newElement);
     }
 
     /** Method Doctor that reads employees from csv */

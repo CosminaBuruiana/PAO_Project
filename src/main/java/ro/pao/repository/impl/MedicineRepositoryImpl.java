@@ -3,6 +3,7 @@ package ro.pao.repository.impl;
 import ro.pao.config.DatabaseConfiguration;
 import ro.pao.mapper.MedicineMapper;
 import ro.pao.model.cure.Medicine;
+import ro.pao.model.entity.Doctor;
 import ro.pao.repository.MedicineRepository;
 
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class MedicineRepositoryImpl implements MedicineRepository {
 
     @Override
     public Optional<Medicine> getObjectById(UUID id) {
-        String selectSql = "SELECT * FROM example_table WHERE id=?";
+        String selectSql = "SELECT * FROM medicine WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
@@ -36,7 +37,7 @@ public class MedicineRepositoryImpl implements MedicineRepository {
 
     @Override
     public void deleteObjectById(UUID id) {
-        String updateNameSql = "DELETE FROM example_table WHERE id=?";
+        String updateNameSql = "DELETE FROM medicine WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
@@ -50,12 +51,12 @@ public class MedicineRepositoryImpl implements MedicineRepository {
 
     @Override
     public void updateObjectById(UUID id, Medicine newObject) {
-        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
+        String updateNameSql = "UPDATE medicine SET price=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            //preparedStatement.setString(1, newObject.getExampleStringField());
-            //preparedStatement.setString(2, id.toString());
+            preparedStatement.setDouble(1, newObject.getPrice());
+            preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -64,13 +65,32 @@ public class MedicineRepositoryImpl implements MedicineRepository {
     }
 
     @Override
+    public Optional<List<Medicine>> getObjectByPrice(Double price) {
+        String selectSql = "SELECT * FROM medicine WHERE price = ?";
+
+        try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
+            preparedStatement.setDouble(1, Double.parseDouble(price.toString()));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return Optional.ofNullable(medicineMapper.mapToMedicineList(resultSet));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Optional.empty();
+
+    }
+    @Override
     public void addNewObject(Medicine Medicine) {
-        String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
+        String insertSql = "INSERT INTO medicine (id, name, price,medicine_type) VALUES (?, ?,?,?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
-           // preparedStatement.setString(1, Medicine.getId().toString());
-            //preparedStatement.setString(2, Medicine.getExampleStringField());
+            preparedStatement.setString(1, Medicine.getID().toString());
+            preparedStatement.setString(2, Medicine.getName().toString());
+            preparedStatement.setDouble(3, Medicine.getPrice().doubleValue());
+            preparedStatement.setString(4, Medicine.getMedicineType().toString());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -80,7 +100,7 @@ public class MedicineRepositoryImpl implements MedicineRepository {
 
     @Override
     public List<Medicine> getAll() {
-        String selectSql = "SELECT * FROM example_table";
+        String selectSql = "SELECT * FROM medicine";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

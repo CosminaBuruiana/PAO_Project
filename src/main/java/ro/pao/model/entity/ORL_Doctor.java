@@ -13,7 +13,7 @@ import ro.pao.model.tool.ToolORL;
 @ToString
 @SuperBuilder
 
-public class ORL_Doctor extends Doctor{
+public non-sealed class ORL_Doctor extends Doctor{
 
    private ToolORL tool;
 

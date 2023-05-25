@@ -20,7 +20,7 @@ public class ToolOphthalmologistRepositoryImpl implements ToolOphthalmologistRep
 
     @Override
     public Optional<ToolOphthalmologist> getObjectById(UUID id) {
-        String selectSql = "SELECT * FROM example_table WHERE id=?";
+        String selectSql = "SELECT * FROM toolOphthalmologist WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
@@ -37,7 +37,7 @@ public class ToolOphthalmologistRepositoryImpl implements ToolOphthalmologistRep
 
     @Override
     public void deleteObjectById(UUID id) {
-        String updateNameSql = "DELETE FROM example_table WHERE id=?";
+        String updateNameSql = "DELETE FROM toolOphthalmologist WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
@@ -51,11 +51,11 @@ public class ToolOphthalmologistRepositoryImpl implements ToolOphthalmologistRep
 
     @Override
     public void updateObjectById(UUID id, ToolOphthalmologist newObject) {
-        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
+        String updateNameSql = "UPDATE toolOphthalmologist SET name=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            //preparedStatement.setString(1, newObject.getExampleStringField());
+            preparedStatement.setString(1, newObject.getName());
             preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
@@ -66,12 +66,12 @@ public class ToolOphthalmologistRepositoryImpl implements ToolOphthalmologistRep
 
     @Override
     public void addNewObject(ToolOphthalmologist ToolOphthalmologist) {
-        String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
+        String insertSql = "INSERT INTO toolOphthalmologist (id, name) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
             preparedStatement.setString(1, ToolOphthalmologist.getId().toString());
-            //preparedStatement.setString(2, ToolOphthalmologist.getExampleStringField());
+            preparedStatement.setString(2, ToolOphthalmologist.getName());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -81,7 +81,7 @@ public class ToolOphthalmologistRepositoryImpl implements ToolOphthalmologistRep
 
     @Override
     public List<ToolOphthalmologist> getAll() {
-        String selectSql = "SELECT * FROM example_table";
+        String selectSql = "SELECT * FROM toolOphthalmologist";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

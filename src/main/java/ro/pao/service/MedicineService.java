@@ -1,5 +1,6 @@
 package ro.pao.service;
 
+import ro.pao.model.administration.Appointment;
 import ro.pao.model.cure.Medicine;
 
 import java.util.List;
@@ -22,7 +23,9 @@ public interface MedicineService {
 
     Optional<Medicine> getById(UUID id);
 
-    Optional<Medicine> getBySomeFieldOfClass(Object someFieldFromMedicine);
+    Optional<Medicine> getByName(Medicine someFieldFromMedicine);
+
+    Optional<List<Medicine>> getByPrice(Double price);
 
     List<Medicine> getAllFromList();
 

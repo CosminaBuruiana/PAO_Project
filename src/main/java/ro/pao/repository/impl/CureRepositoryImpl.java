@@ -5,10 +5,7 @@ import ro.pao.mapper.CureMapper;
 import ro.pao.model.cure.Cure;
 import ro.pao.repository.CureRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,7 +16,7 @@ public class CureRepositoryImpl implements CureRepository {
 
     @Override
     public Optional<Cure> getObjectById(UUID id) {
-        String selectSql = "SELECT * FROM example_table WHERE id=?";
+        String selectSql = "SELECT * FROM cure WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
@@ -36,7 +33,7 @@ public class CureRepositoryImpl implements CureRepository {
 
     @Override
     public void deleteObjectById(UUID id) {
-        String updateNameSql = "DELETE FROM example_table WHERE id=?";
+        String updateNameSql = "DELETE FROM cure WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
@@ -50,12 +47,12 @@ public class CureRepositoryImpl implements CureRepository {
 
     @Override
     public void updateObjectById(UUID id, Cure newObject) {
-        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
+        String updateNameSql = "UPDATE cure SET name=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-           // preparedStatement.setString(1, newObject.getExampleStringField());
-           // preparedStatement.setString(2, id.toString());
+           preparedStatement.setString(1, newObject.getName());
+           preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -65,12 +62,15 @@ public class CureRepositoryImpl implements CureRepository {
 
     @Override
     public void addNewObject(Cure Cure) {
-        String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
+        String insertSql = "INSERT INTO cure (id, name, start_date,end_date) VALUES (?, ?,?,?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
-           // preparedStatement.setString(1, Cure.getId().toString());
-           // preparedStatement.setString(2, Cure.getExampleStringField());
+           preparedStatement.setString(1, Cure.getIdCure().toString());
+           preparedStatement.setString(2, Cure.getName().toString());
+           preparedStatement.setDate(3, Date.valueOf(Cure.getStart_date().toString()));
+           preparedStatement.setDate(4, Date.valueOf(Cure.getEnd_date().toString()));
+
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class CureRepositoryImpl implements CureRepository {
 
     @Override
     public List<Cure> getAll() {
-        String selectSql = "SELECT * FROM example_table";
+        String selectSql = "SELECT * FROM cure";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

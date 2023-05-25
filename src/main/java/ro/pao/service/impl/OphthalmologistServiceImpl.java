@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
+import ro.pao.model.cure.Cure;
 import ro.pao.model.entity.Ophthalmologist;
 import ro.pao.repository.OphthalmologistRepository;
 import ro.pao.service.OphthalmologistService;
@@ -20,6 +21,7 @@ import java.util.*;
 public class OphthalmologistServiceImpl implements OphthalmologistService {
 
     private final OphthalmologistRepository ophthalmologistRepository;
+    private static List<Ophthalmologist> ophthalmologistList = new ArrayList<>();
 
     @Override
     public Optional<Ophthalmologist> getById(UUID id) {

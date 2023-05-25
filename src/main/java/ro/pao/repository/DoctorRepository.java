@@ -2,6 +2,8 @@ package ro.pao.repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import ro.pao.model.administration.Appointment;
 import ro.pao.model.entity.Doctor;
 import java.util.List;
 import java.util.Optional; 
@@ -9,13 +11,14 @@ import java.util.UUID;
 
 public interface DoctorRepository {
 
-    Optional<Doctor> getObjectById(UUID id);
+    Optional<Doctor> getDoctorById(UUID id);
+    Optional<List<Doctor>> getObjectByName(String name);
 
-    void deleteObjectById(UUID id);
+    void deleteDoctorById(UUID id);
 
-    void updateObjectById(UUID id, Doctor newObject);
+    void updateDoctorById(UUID id, Doctor newDoctor);
 
-    void addNewObject(Doctor Doctor);
+    void addNewDoctor(Doctor Doctor);
 
     List<Doctor> getAll();
 

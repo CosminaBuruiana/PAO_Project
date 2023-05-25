@@ -17,7 +17,7 @@ import lombok.*;
 @ToString
 @SuperBuilder
 
-public class Doctor extends Person {
+public sealed class Doctor extends Person permits ORL_Doctor,Ophthalmologist, Cardiologist {
 
     private Date hire_date;
     private Integer experience;

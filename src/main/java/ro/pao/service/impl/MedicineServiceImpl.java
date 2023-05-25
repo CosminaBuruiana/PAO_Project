@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
+import ro.pao.model.administration.Appointment;
 import ro.pao.model.cure.Medicine;
 import ro.pao.repository.MedicineRepository;
 import ro.pao.service.MedicineService;
@@ -27,8 +28,16 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Optional<Medicine> getBySomeFieldOfClass(Object someFieldFromMedicine) {
+    public Optional<Medicine> getByName(Medicine someFieldFromMedicine) {
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<List<Medicine>> getByPrice(Double price) {
+
+        //return Optional.empty();
+        return medicineRepository.getObjectByPrice(price);
+
     }
 
     @Override

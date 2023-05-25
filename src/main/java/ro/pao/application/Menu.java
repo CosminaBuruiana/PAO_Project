@@ -2,14 +2,16 @@ package ro.pao.application;
 
 import ro.pao.model.ExampleClass;
 import ro.pao.model.entity.Doctor;
-import ro.pao.repository.impl.ExampleRepositoryImpl;
-import ro.pao.service.ExampleService;
-import ro.pao.service.impl.ExampleServiceImpl;
+import ro.pao.model.entity.ORL_Doctor;
+import ro.pao.repository.impl.*;
+import ro.pao.service.*;
+import ro.pao.service.impl.*;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * In Meniu se fac operatiile care pot lua informatii din toate dintre servicile definite.
@@ -22,6 +24,23 @@ public class Menu {
     private static Menu INSTANCE;
 
     private final ExampleService exampleService = new ExampleServiceImpl(new ExampleRepositoryImpl());
+    private final MedicineService medicineService = new MedicineServiceImpl(new MedicineRepositoryImpl());
+
+    private final CureService cureService = new CureServiceImpl(new CureRepositoryImpl());
+
+    private final DoctorService doctorService = new DoctorServiceImpl(new DoctorRepositoryImpl());
+
+    private final PatientService patientService = new PatientServiceImpl(new PatientRepositoryImpl());
+
+    private final ORL_DoctorService doctorORLService = new ORL_DoctorServiceImpl(new ORL_DoctorRepositoryImpl());
+
+    private final OphthalmologistService ophthalmologistService = new OphthalmologistServiceImpl(new OphthalmologistRepositoryImpl());
+
+    private final CardiologistService cardiologistService = new CardiologistServiceImpl(new CardiologistRepositoryImpl());
+
+    private final AppointmentService appointmentService = new AppointmentServiceImpl(new AppointmentRepositoryImpl());
+
+    private static final Logger logger = Logger.getGlobal();
 
     public static Menu getInstance() {
         return (INSTANCE == null ? new Menu() : INSTANCE);

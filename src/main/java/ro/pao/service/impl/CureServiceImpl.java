@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
 import ro.pao.model.cure.Cure;
+import ro.pao.model.entity.Cardiologist;
 import ro.pao.repository.CureRepository;
 import ro.pao.service.CureService;
 
@@ -20,6 +21,7 @@ import java.util.*;
 public class CureServiceImpl implements CureService {
 
     private final CureRepository cureRepository;
+    private static List<Cure> cureList = new ArrayList<>();
 
     @Override
     public Optional<Cure> getById(UUID id) {

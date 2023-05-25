@@ -1,7 +1,9 @@
 package ro.pao.service;
 
 import ro.pao.model.entity.Doctor;
+import ro.pao.repository.DoctorRepository;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,7 +24,9 @@ public interface DoctorService {
 
     Optional<Doctor> getById(UUID id);
 
-    Optional<Doctor> getBySomeFieldOfClass(Object someFieldFromDoctor);
+    Optional<List<Doctor>> getByName(String name);
+
+    Optional<Doctor> getBySomeFieldOfClass(Doctor someFieldFromDoctor);
 
     List<Doctor> getAllFromList();
 

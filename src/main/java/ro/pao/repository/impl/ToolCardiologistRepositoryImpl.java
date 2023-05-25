@@ -20,7 +20,7 @@ public class ToolCardiologistRepositoryImpl implements ToolCardiologistRepositor
 
     @Override
     public Optional<ToolCardiologist> getObjectById(UUID id) {
-        String selectSql = "SELECT * FROM example_table WHERE id=?";
+        String selectSql = "SELECT * FROM toolcardiologist WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
@@ -37,7 +37,7 @@ public class ToolCardiologistRepositoryImpl implements ToolCardiologistRepositor
 
     @Override
     public void deleteObjectById(UUID id) {
-        String updateNameSql = "DELETE FROM example_table WHERE id=?";
+        String updateNameSql = "DELETE FROM toolcardiologist WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
@@ -51,11 +51,11 @@ public class ToolCardiologistRepositoryImpl implements ToolCardiologistRepositor
 
     @Override
     public void updateObjectById(UUID id, ToolCardiologist newObject) {
-        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
+        String updateNameSql = "UPDATE toolcardiologist SET name=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            //preparedStatement.setString(1, newObject.getExampleStringField());
+            preparedStatement.setString(1, newObject.getName());
             preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
@@ -66,12 +66,12 @@ public class ToolCardiologistRepositoryImpl implements ToolCardiologistRepositor
 
     @Override
     public void addNewObject(ToolCardiologist ToolCardiologist) {
-        String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
+        String insertSql = "INSERT INTO toolcardiologist (id, name) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
             preparedStatement.setString(1, ToolCardiologist.getId().toString());
-            //preparedStatement.setString(2, ToolCardiologist.getExampleStringField());
+            preparedStatement.setString(2, ToolCardiologist.getName());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -81,7 +81,7 @@ public class ToolCardiologistRepositoryImpl implements ToolCardiologistRepositor
 
     @Override
     public List<ToolCardiologist> getAll() {
-        String selectSql = "SELECT * FROM example_table";
+        String selectSql = "SELECT * FROM toolcardiologist";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

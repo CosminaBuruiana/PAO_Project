@@ -19,7 +19,7 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public Optional<Patient> getObjectById(UUID id) {
-        String selectSql = "SELECT * FROM example_table WHERE id=?";
+        String selectSql = "SELECT * FROM patient WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
@@ -36,7 +36,7 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public void deleteObjectById(UUID id) {
-        String updateNameSql = "DELETE FROM example_table WHERE id=?";
+        String updateNameSql = "DELETE FROM patient WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
@@ -50,11 +50,11 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public void updateObjectById(UUID id, Patient newObject) {
-        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
+        String updateNameSql = "UPDATE patient SET disease=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            //preparedStatement.setString(1, newObject.getExampleStringField());
+            preparedStatement.setString(1, newObject.getDisease());
             preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
@@ -65,12 +65,22 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public void addNewObject(Patient Patient) {
-        String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
+        String insertSql = "INSERT INTO doctor (id, name,last_name, email, cnp, address,phone_number, status, disease,blood_type,medical_insurance) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
-           // preparedStatement.setString(1, Patient.getId().toString());
-           // preparedStatement.setString(2, Patient.getExampleStringField());
+                preparedStatement.setString(1, Patient.getIdPerson().toString());
+                preparedStatement.setString(2, Patient.getName().toString());
+                preparedStatement.setString(3, Patient.getLast_name().toString());
+                preparedStatement.setString(4, Patient.getEmail().toString());
+                preparedStatement.setString(5, Patient.getCNP().toString());
+                preparedStatement.setString(6, Patient.getAdress().toString());
+                preparedStatement.setString(7, Patient.getPhone_number().toString());
+            preparedStatement.setString(8, Patient.getStatus().toString());
+            preparedStatement.setString(9, Patient.getDisease().toString());
+            preparedStatement.setString(10, Patient.getBloodType());
+            preparedStatement.setString(11, Patient.getMedical_insurance());
+
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -80,7 +90,7 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public List<Patient> getAll() {
-        String selectSql = "SELECT * FROM example_table";
+        String selectSql = "SELECT * FROM patient";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

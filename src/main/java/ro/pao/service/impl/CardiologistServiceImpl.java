@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
 import ro.pao.model.entity.Cardiologist;
+import ro.pao.model.entity.Doctor;
 import ro.pao.repository.CardiologistRepository;
+import ro.pao.repository.DoctorRepository;
 import ro.pao.service.CardiologistService;
 
 import java.nio.file.Path;
@@ -19,7 +21,13 @@ import java.util.*;
 @Getter
 public class CardiologistServiceImpl implements CardiologistService {
 
-    private final CardiologistRepository cardiologistRepository;
+    //private final CardiologistRepository cardiologistRepository;
+    private CardiologistRepository cardiologistRepository;
+    private static List<Cardiologist> cardiologistList = new ArrayList<>();
+
+    public CardiologistServiceImpl(CardiologistRepository cardiologistRepository) {
+        this.cardiologistRepository = cardiologistRepository;
+    }
 
     @Override
     public Optional<Cardiologist> getById(UUID id) {

@@ -14,7 +14,7 @@ import ro.pao.model.tool.ToolCardiologist;
 @SuperBuilder
 
 
-public class Cardiologist extends Doctor {
+public non-sealed class Cardiologist extends Doctor {
 
    private ToolCardiologist tool;
 

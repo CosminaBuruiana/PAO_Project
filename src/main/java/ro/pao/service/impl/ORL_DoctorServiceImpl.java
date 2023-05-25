@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
+import ro.pao.model.cure.Cure;
 import ro.pao.model.entity.ORL_Doctor;
 import ro.pao.repository.ORL_DoctorRepository;
 import ro.pao.service.ORL_DoctorService;
@@ -20,6 +21,7 @@ import java.util.*;
 public class ORL_DoctorServiceImpl implements ORL_DoctorService {
 
     private final ORL_DoctorRepository orl_DoctorRepository;
+    private static List<ORL_Doctor> ORL_DoctorList = new ArrayList<>();
 
     @Override
     public Optional<ORL_Doctor> getById(UUID id) {

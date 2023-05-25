@@ -20,7 +20,7 @@ public class ToolORLRepositoryImpl implements ToolORLRepository {
 
     @Override
     public Optional<ToolORL> getObjectById(UUID id) {
-        String selectSql = "SELECT * FROM example_table WHERE id=?";
+        String selectSql = "SELECT * FROM toolORL WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
@@ -37,7 +37,7 @@ public class ToolORLRepositoryImpl implements ToolORLRepository {
 
     @Override
     public void deleteObjectById(UUID id) {
-        String updateNameSql = "DELETE FROM example_table WHERE id=?";
+        String updateNameSql = "DELETE FROM toolORL WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
@@ -51,11 +51,11 @@ public class ToolORLRepositoryImpl implements ToolORLRepository {
 
     @Override
     public void updateObjectById(UUID id, ToolORL newObject) {
-        String updateNameSql = "UPDATE example_table SET name=? WHERE id=?";
+        String updateNameSql = "UPDATE toolORL SET name=? WHERE id=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(updateNameSql)) {
-            //preparedStatement.setString(1, newObject.getExampleStringField());
+            preparedStatement.setString(1, newObject.getName());
             preparedStatement.setString(2, id.toString());
 
             preparedStatement.executeUpdate();
@@ -66,12 +66,12 @@ public class ToolORLRepositoryImpl implements ToolORLRepository {
 
     @Override
     public void addNewObject(ToolORL ToolORL) {
-        String insertSql = "INSERT INTO example_table (id, name) VALUES (?, ?)";
+        String insertSql = "INSERT INTO toolORL (id, name) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
             preparedStatement.setString(1, ToolORL.getId().toString());
-            //preparedStatement.setString(2, ToolORL.getExampleStringField());
+            preparedStatement.setString(2, ToolORL.getName());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -81,7 +81,7 @@ public class ToolORLRepositoryImpl implements ToolORLRepository {
 
     @Override
     public List<ToolORL> getAll() {
-        String selectSql = "SELECT * FROM example_table";
+        String selectSql = "SELECT * FROM toolORL";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

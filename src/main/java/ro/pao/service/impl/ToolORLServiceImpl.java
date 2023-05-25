@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
+import ro.pao.model.cure.Cure;
+import ro.pao.model.entity.Ophthalmologist;
 import ro.pao.model.tool.ToolORL;
 import ro.pao.repository.ToolORLRepository;
 import ro.pao.service.ToolORLService;
@@ -20,6 +22,7 @@ import java.util.*;
 public class ToolORLServiceImpl implements ToolORLService {
 
     private final ToolORLRepository toolORLRepository;
+    private static List<ToolORL> toolORLList = new ArrayList<>();
 
     @Override
     public Optional<ToolORL> getById(UUID id) {

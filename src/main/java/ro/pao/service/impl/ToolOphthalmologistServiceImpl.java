@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ro.pao.application.csv.CsvReader;
 import ro.pao.application.csv.CsvWriter;
+import ro.pao.model.cure.Cure;
 import ro.pao.model.tool.ToolOphthalmologist;
 import ro.pao.repository.ToolOphthalmologistRepository;
 import ro.pao.service.ToolOphthalmologistService;
@@ -21,6 +22,7 @@ import java.util.*;
 public class ToolOphthalmologistServiceImpl implements ToolOphthalmologistService {
 
     private final ToolOphthalmologistRepository toolOphthalmologistRepository;
+    private static List<ToolOphthalmologistServiceImpl> toolOphthalmologistList = new ArrayList<>();
 
     @Override
     public Optional<ToolOphthalmologist> getById(UUID id) {
@@ -28,7 +30,7 @@ public class ToolOphthalmologistServiceImpl implements ToolOphthalmologistServic
     }
 
     @Override
-    public Optional<ToolOphthalmologist> getBySomeFieldOfClass(Object someFieldFromToolOphtalmologist) {
+    public Optional<ToolOphthalmologist> getBySomeFieldOfClass(Object someFieldFromToolOphthalmologist) {
         return Optional.empty();
     }
 
