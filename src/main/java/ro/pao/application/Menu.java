@@ -1,5 +1,6 @@
 package ro.pao.application;
 
+import ro.pao.application.csv.CsvWriter;
 import ro.pao.model.ExampleClass;
 import ro.pao.model.administration.Appointment;
 import ro.pao.model.cure.Medicine;
@@ -8,6 +9,8 @@ import ro.pao.repository.impl.*;
 import ro.pao.service.*;
 import ro.pao.service.impl.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.*;
@@ -48,6 +51,8 @@ public class Menu {
     }
 
     public boolean intro() {
+        Path lineByLinePath = Paths.get("./csv/doctors.csv");
+
         String intro = """
                 Intro example
                 """;
@@ -58,16 +63,11 @@ public class Menu {
        // System.out.println("0. Create a list of doctor");
         System.out.println("1. Add a doctor");
         System.out.println("2. List of doctors");
-        System.out.println("3. Modify the doctor experience");
+        System.out.println("3. Modify the doctor's salary");
         System.out.println("4. Delete doctor");
         System.out.println("5. Sort the doctors by salary");
         System.out.println("6. Sort the medicines by price");
-//        System.out.println("7. Create an appointment");
-//        System.out.println("8. Remove an appointment for a doctor");
-//        System.out.println("9. Add an appointment for a doctor");
-//        System.out.println("10. Appointments list by a date");
-//        System.out.println("11. Appointments list by a doctor");
-
+        System.out.println("7. Write in CSV the list of doctors");
 
         Scanner keyboard = new Scanner(System.in);
 
@@ -511,25 +511,51 @@ public class Menu {
 
 
         } else if ("7".equals(Keyboard)) {
+            System.out.println("Print Excel list of doctors");
 
-            System.out.println("Create an appointment");
-            System.out.println("Enter the data of appointment: ");
+            List<String[]> lines = new ArrayList<>();
+            lines.add(new String[] {"name", "last name", "phone", "address"});
 
-            Scanner s = new Scanner(System.in);
-            String data = s.nextLine();
+            var it = doctorService.getAllFromList().iterator();
+            while (it.hasNext()) {
+                var doctorel = it.next();
 
-            System.out.println("Enter the price of appointment: ");
-            Scanner price1 = new Scanner(System.in);
-            Double price = price1.nextDouble();
+                lines.add(new String[] {
+                        doctorel.getName(),
+                        doctorel.getLast_name(),
+                        doctorel.getPhone_number(),
+                        doctorel.getEmail()
+                });
+            }
 
-            Appointment ap = Appointment.builder()
-                    .idAppointment(UUID.randomUUID())
-                    .data(data)
-                    .price(price)
-                    .build();
+            try {
+                CsvWriter csvWriter = CsvWriter.getInstance();
+                String lineByLineContents = csvWriter.writeLineByLine(lines, lineByLinePath);
+                System.out.println("Contents of " + lineByLinePath + ":");
+                System.out.println(lineByLineContents);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-            appointmentService.addOnlyOne(ap);
-            System.out.println("The appointment has been recorded!");
+            /// OLD 7 /////////////////////////////////////////////////////////////
+//            System.out.println("Create an appointment");
+//            System.out.println("Enter the data of appointment: ");
+//
+//            Scanner s = new Scanner(System.in);
+//            String data = s.nextLine();
+//
+//            System.out.println("Enter the price of appointment: ");
+//            Scanner price1 = new Scanner(System.in);
+//            Double price = price1.nextDouble();
+//
+//            Appointment ap = Appointment.builder()
+//                    .idAppointment(UUID.randomUUID())
+//                    .data(data)
+//                    .price(price)
+//                    .build();
+//
+//            appointmentService.addOnlyOne(ap);
+//            System.out.println("The appointment has been recorded!");
 
 
         } else if ("8".equals(Keyboard)) {
