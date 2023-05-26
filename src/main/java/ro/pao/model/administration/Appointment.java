@@ -17,7 +17,7 @@ import lombok.*;
 public class Appointment {
 
     private UUID idAppointment;
-    private Date data;
+    private String data;
     private Double price;
     private UUID id_doctor;
 

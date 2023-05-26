@@ -11,12 +11,12 @@ import java.util.UUID;
 
 public interface DoctorRepository {
 
-    Optional<Doctor> getDoctorById(UUID id);
+    Optional<Doctor> getDoctorById(String id);
     Optional<List<Doctor>> getObjectByName(String name);
 
-    void deleteDoctorById(UUID id);
+    void deleteDoctorById(String id);
 
-    void updateDoctorById(UUID id, Doctor newDoctor);
+    void updateDoctorById(String id, Doctor newDoctor);
 
     void addNewDoctor(Doctor Doctor);
 

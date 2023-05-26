@@ -1,11 +1,8 @@
 package ro.pao.repository.impl;
-
 import ro.pao.config.DatabaseConfiguration;
 import ro.pao.mapper.AppointmentMapper;
 import ro.pao.model.administration.Appointment;
 import ro.pao.repository.AppointmentRepository;
-
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +29,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         return Optional.empty();
     }
     @Override
-    public Optional<List<Appointment>> getObjectByData(Data date) {
+    public Optional<List<Appointment>> getObjectByData(String date) {
         String selectSql = "SELECT * FROM appointment WHERE data=?";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
@@ -102,7 +99,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
             preparedStatement.setString(1, Appointment.getIdAppointment().toString());
-            preparedStatement.setDate(2, Date.valueOf(Appointment.getData().toString()));
+            preparedStatement.setString(2, Appointment.getData().toString());
             preparedStatement.setDouble(3, Appointment.getPrice().doubleValue());
             preparedStatement.setString(4,Appointment.getId_doctor().toString());
 

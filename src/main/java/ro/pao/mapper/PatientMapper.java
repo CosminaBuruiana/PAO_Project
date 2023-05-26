@@ -31,7 +31,8 @@ public class PatientMapper {
         if (resultSet.next()) {
             return Optional.of(
                     Patient.builder()
-                            .idPerson(UUID.fromString(resultSet.getString(1)))
+                            //.idPerson(UUID.fromString(resultSet.getString(1)))
+                            .idPerson((resultSet.getString(1)))
                             .name(resultSet.getString(2))
                             .last_name(resultSet.getString(3))
                             .email(resultSet.getString(4))
@@ -56,7 +57,8 @@ public class PatientMapper {
         while (resultSet.next()) {
             PatientList.add(
                     Patient.builder()
-                            .idPerson(UUID.fromString(resultSet.getString(1)))
+                            //.idPerson(UUID.fromString(resultSet.getString(1)))
+                            .idPerson(resultSet.getString(1))
                             .name(resultSet.getString(2))
                             .last_name(resultSet.getString(3))
                             .email(resultSet.getString(4))

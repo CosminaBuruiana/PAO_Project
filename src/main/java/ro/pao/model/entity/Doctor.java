@@ -19,7 +19,7 @@ import lombok.*;
 
 public sealed class Doctor extends Person permits ORL_Doctor,Ophthalmologist, Cardiologist {
 
-    private Date hire_date;
+    private String hire_date;
     private Integer experience;
     private Double salary;
     private List<Appointment> appointmentList = new ArrayList<>();

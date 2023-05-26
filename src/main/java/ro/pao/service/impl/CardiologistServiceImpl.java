@@ -20,14 +20,8 @@ import java.util.*;
 @RequiredArgsConstructor
 @Getter
 public class CardiologistServiceImpl implements CardiologistService {
-
-    //private final CardiologistRepository cardiologistRepository;
-    private CardiologistRepository cardiologistRepository;
+    private final CardiologistRepository cardiologistRepository;
     private static List<Cardiologist> cardiologistList = new ArrayList<>();
-
-    public CardiologistServiceImpl(CardiologistRepository cardiologistRepository) {
-        this.cardiologistRepository = cardiologistRepository;
-    }
 
     @Override
     public Optional<Cardiologist> getById(UUID id) {

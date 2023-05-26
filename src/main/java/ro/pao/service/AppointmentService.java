@@ -24,7 +24,7 @@ public interface AppointmentService {
 
     Optional<Appointment> getById(UUID id) throws SQLException;
 
-    Optional<List<Appointment>> getByData(Data date);
+    Optional<List<Appointment>> getByData(String date);
     Optional<List<Appointment>> getByDoctor(UUID id);
 
     List<Appointment> getAllFromList();

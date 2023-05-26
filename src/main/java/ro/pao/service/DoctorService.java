@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public interface DoctorService {
 
-    Optional<Doctor> getById(UUID id);
+    Optional<Doctor> getById(String id);
 
     Optional<List<Doctor>> getByName(String name);
 
@@ -36,7 +36,7 @@ public interface DoctorService {
 
     void addOnlyOne(Doctor Doctor);
 
-    void removeElementById(UUID id);
+    void removeElementById(String id);
 
-    void modificaElementById(UUID id, Doctor newElement);
+    void modificaElementById(String id, Doctor newElement);
 }

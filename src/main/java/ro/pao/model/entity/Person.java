@@ -12,7 +12,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public abstract class Person {
 
-    protected UUID idPerson;
+    protected String idPerson;
 
     protected String name;
     protected String last_name;

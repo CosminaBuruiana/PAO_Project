@@ -24,7 +24,6 @@ import java.util.*;
 @Getter
 public class AppointmentServiceImpl implements AppointmentService {
 
-    //private final AppointmentRepository appointmentRepository;
     private static final Logger logger = Logger.getGlobal();
 
     private final AppointmentRepository appointmentRepository;
@@ -63,7 +62,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Optional<List<Appointment>> getByData(Data date) {
+    public Optional<List<Appointment>> getByData(String date) {
 
         //return Optional.empty();
         return appointmentRepository.getObjectByData(date);

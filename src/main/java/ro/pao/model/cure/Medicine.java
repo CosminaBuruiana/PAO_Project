@@ -1,7 +1,7 @@
 package ro.pao.model.cure;
 import lombok.*;
 
-import ro.pao.model.cure.enums.*;
+//import ro.pao.model.cure.enums.MedicineType;
 import java.util.UUID;
 
 @Getter

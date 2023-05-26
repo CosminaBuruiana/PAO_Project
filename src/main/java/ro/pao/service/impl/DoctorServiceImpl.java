@@ -21,11 +21,9 @@ import java.util.*;
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
-    private static List<Doctor> doctorList = new ArrayList<>();
-
 
     @Override
-    public Optional<Doctor> getById(UUID id) {
+    public Optional<Doctor> getById(String id) {
         return doctorRepository.getDoctorById(id);
     }
 
@@ -60,12 +58,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void removeElementById(UUID id) {
+    public void removeElementById(String id) {
         doctorRepository.deleteDoctorById(id);
     }
 
     @Override
-    public void modificaElementById(UUID id, Doctor newElement) {
+    public void modificaElementById(String id, Doctor newElement) {
         doctorRepository.updateDoctorById(id, newElement);
     }
 

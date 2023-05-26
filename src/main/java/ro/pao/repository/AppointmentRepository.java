@@ -13,7 +13,7 @@ public interface AppointmentRepository {
 
 //    Optional<Appointment> getAppointmentByData(Data date);
 //    Optional<Appointment> getAppointmentByDoctor(UUID id);
-    Optional<List<Appointment>> getObjectByData(Data date);
+    Optional<List<Appointment>> getObjectByData(String date);
 
     Optional<List<Appointment>> getObjectByDoctor(UUID id);
 

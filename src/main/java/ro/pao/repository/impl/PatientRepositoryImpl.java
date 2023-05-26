@@ -65,7 +65,7 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public void addNewObject(Patient Patient) {
-        String insertSql = "INSERT INTO doctor (id, name,last_name, email, cnp, address,phone_number, status, disease,blood_type,medical_insurance) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
+        String insertSql = "INSERT INTO person (id, name,last_name, email, cnp, address,phone_number, status, disease,blood_type,medical_insurance) VALUES (?, ?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
@@ -90,7 +90,7 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public List<Patient> getAll() {
-        String selectSql = "SELECT * FROM patient";
+        String selectSql = "SELECT * FROM patient p,person pr where p.id = pr.id";
 
         try (Connection connection = DatabaseConfiguration.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {

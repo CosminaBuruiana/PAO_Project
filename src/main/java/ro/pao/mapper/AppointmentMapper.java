@@ -28,7 +28,7 @@ public class AppointmentMapper {
             return Optional.of(
                     Appointment.builder()
                             .idAppointment(UUID.fromString(resultSet.getString(1)))
-                            .data(resultSet.getDate(2))
+                            .data(resultSet.getString(2))
                             .price(resultSet.getDouble(3))
                             .id_doctor(UUID.fromString(resultSet.getString(4)))
                             .build()
@@ -44,7 +44,7 @@ public class AppointmentMapper {
             AppointmentList.add(
                     Appointment.builder()
                             .idAppointment(UUID.fromString(resultSet.getString(1)))
-                            .data(resultSet.getDate(2))
+                            .data(resultSet.getString(2))
                             .price(resultSet.getDouble(3))
                             .id_doctor(UUID.fromString(resultSet.getString(4)))
                             .build()
